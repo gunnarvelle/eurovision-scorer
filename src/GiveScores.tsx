@@ -32,15 +32,23 @@ const GiveScores = () => {
   const scoresIsEmpty = scores.length === 0;
   return (
     <div>
-      <ul>
-        {scores.map(([point, country]) => (
-          <li key={point + country}>
-            {point} {country}
-          </li>
-        ))}
-      </ul>
+      <div>
+        <ul>
+          {scores.map(([point, country]) => (
+            <li key={point + country}>
+              {point} {country}
+            </li>
+          ))}
+        </ul>
+      </div>
       {nextPoint && (
-        <React.Fragment>
+        <div>
+          {nextPoint} points
+          <br /> goes to
+        </div>
+      )}
+      {nextPoint && (
+        <div>
           {countries.map(c => (
             <CountryButton
               key={c}
@@ -53,11 +61,12 @@ const GiveScores = () => {
               name={c}
             />
           ))}
-        </React.Fragment>
+        </div>
       )}
       <div>
         <button
           disabled={scoresIsEmpty}
+          className="nes-btn is-error"
           onClick={() => {
             if (!scoresIsEmpty) {
               const lastScore = scores.pop() || [0];

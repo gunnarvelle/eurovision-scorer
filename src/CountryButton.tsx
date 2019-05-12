@@ -11,9 +11,14 @@ type Props = {
 export default ({ name, onClick, disabled }: Props) => {
   const flag = `/flags/${nameToCountryCode[name].toLowerCase()}.png`;
   return (
-    <button disabled={disabled} onClick={onClick}>
-      <img src={flag} alt={`Flag of ${name}`} />
-      {name}
+    <button
+      type="button"
+      className="nes-btn is-primary"
+      disabled={disabled}
+      onClick={onClick}
+    >
+      <img src={flag} className="flag" alt={`Flag of ${name}`} />
+      <span className="nes-text">{name}</span>
     </button>
   );
 };
