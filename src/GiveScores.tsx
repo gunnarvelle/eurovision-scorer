@@ -27,19 +27,20 @@ const GiveScores = () => {
 
   const [nextPoint, ...restPoints] = points;
 
-  const scoredCountries = scores.map(([_, c]) => c);
+  const scoredCountries = scores.map(([, c]) => c);
 
   const scoresIsEmpty = scores.length === 0;
   return (
     <div>
       <div>
-        <ul>
+        <table>
           {scores.map(([point, country]) => (
-            <li key={point + country}>
-              {point} {country}
-            </li>
+            <tr key={point + country}>
+              <td>{point}</td>
+              <td>{country}</td>
+            </tr>
           ))}
-        </ul>
+        </table>
       </div>
       {nextPoint && (
         <div>

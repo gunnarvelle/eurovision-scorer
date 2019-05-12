@@ -13,7 +13,7 @@ export default ({ name, onClick, disabled }: Props) => {
   return (
     <button
       type="button"
-      className="nes-btn is-primary"
+      className={`nes-btn is-primary ${disabled && "is-disabled"}`}
       disabled={disabled}
       onClick={onClick}
     >

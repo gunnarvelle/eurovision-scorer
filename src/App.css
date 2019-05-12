@@ -4,7 +4,7 @@
 }
 
 .flag {
-  padding: 0.5rem;
+  margin: 0.2rem 0.7rem 0.2rem 0.2rem;
 }
 
 .App-logo {
@@ -35,4 +35,13 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+table {
+  margin: 1rem auto;
+  text-align: center;
+}
+
+td {
+  padding: 0.2rem 0.5rem;
 }
