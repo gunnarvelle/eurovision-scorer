@@ -29,47 +29,47 @@ const GiveScores = () => {
 
   const scoredCountries = scores.map(([_, c]) => c);
 
+  const scoresIsEmpty = scores.length === 0;
   return (
     <div>
       <ul>
         {scores.map(([point, country]) => (
-          <li>
+          <li key={point + country}>
             {point} {country}
           </li>
         ))}
       </ul>
       {nextPoint && (
         <React.Fragment>
-          {countries
-            .filter(c => !scoredCountries.includes(c))
-            .map(c => (
-              <CountryButton
-                onClick={() => {
-                  setPoints(restPoints);
-                  scores.push([nextPoint, c]);
-                  setScores(scores);
-                }}
-                name={c}
-              />
-            ))}
+          {countries.map(c => (
+            <CountryButton
+              key={c}
+              disabled={scoredCountries.includes(c)}
+              onClick={() => {
+                setPoints(restPoints);
+                scores.push([nextPoint, c]);
+                setScores(scores);
+              }}
+              name={c}
+            />
+          ))}
         </React.Fragment>
       )}
       <div>
-        {scores.length > 0 && (
-          <button
-            onClick={() => {
-              const lastScore = scores.pop();
-              if (lastScore) {
-                const [point, junk] = lastScore;
-                points.unshift(point);
-                setPoints(points);
-                setScores(scores);
-              }
-            }}
-          >
-            Undo
-          </button>
-        )}
+        <button
+          disabled={scoresIsEmpty}
+          onClick={() => {
+            if (!scoresIsEmpty) {
+              const lastScore = scores.pop() || [0];
+              const [point] = lastScore;
+
+              setPoints([point, ...points]);
+              setScores([...scores]);
+            }
+          }}
+        >
+          Undo
+        </button>
       </div>
     </div>
   );
