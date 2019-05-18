@@ -1,35 +1,7 @@
 import React, { useState } from "react";
 import CountryButton from "./CountryButton";
 import { db } from "./Firebase";
-
-const countries = [
-  "Malta",
-  "Albania",
-  "Czech Republic",
-  "Germany",
-  "Russia",
-  "Denmark",
-  "San Marino",
-  "North Macedonia",
-  "Sweden",
-  "Slovenia",
-  "Cyprus",
-  "Netherlands",
-  "Greece",
-  "Israel",
-  "Norway",
-  "United Kingdom",
-  "Iceland",
-  "Estonia",
-  "Belarus",
-  "Azerbaijan",
-  "France",
-  "Italy",
-  "Serbia",
-  "Switzerland",
-  "Australia",
-  "Spain"
-];
+import countries from "./participatingCountries";
 
 const Voting = () => {
   const [votes, setVotes]: [{ [point: number]: string }, any] = useState([]);
