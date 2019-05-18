@@ -26,26 +26,32 @@ const GiveScores = () => {
   const [points, setPoints] = useState([12, 10, 8, 7, 6, 5, 4, 3, 2, 1]);
 
   const [nextPoint, ...restPoints] = points;
+  const [postSucceeded, setPostSucceeded] = useState(false);
 
   const scoredCountries = scores.map(([, c]) => c);
+  const awardedAllPoints = !nextPoint;
 
   const scoresIsEmpty = scores.length === 0;
   return (
     <div>
       <div>
         <table>
-          {scores.map(([point, country]) => (
-            <tr key={point + country}>
-              <td>{point}</td>
-              <td>{country}</td>
-            </tr>
-          ))}
+          <tbody>
+            {scores.map(([point, country]) => (
+              <tr key={point + country}>
+                <td>{point}</td>
+                <td>{country}</td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
       {nextPoint && (
         <div>
-          {nextPoint} points
-          <br /> goes to
+          <em>
+            {nextPoint} points
+            <br /> goes to
+          </em>
         </div>
       )}
       {nextPoint && (
@@ -64,23 +70,43 @@ const GiveScores = () => {
           ))}
         </div>
       )}
-      <div>
-        <button
-          disabled={scoresIsEmpty}
-          className="nes-btn is-error"
-          onClick={() => {
-            if (!scoresIsEmpty) {
-              const lastScore = scores.pop() || [0];
-              const [point] = lastScore;
+      {postSucceeded ? (
+        <div>Sendte inn!</div>
+      ) : (
+        <React.Fragment>
+          <div>
+            <button
+              disabled={scoresIsEmpty}
+              className="nes-btn is-error"
+              onClick={() => {
+                if (scores) {
+                  const lastScore = scores.pop();
+                  const [point] = lastScore || [0];
 
-              setPoints([point, ...points]);
-              setScores([...scores]);
-            }
-          }}
-        >
-          Undo
-        </button>
-      </div>
+                  setPoints([point, ...points]);
+                  setScores([...scores]);
+                }
+              }}
+            >
+              Undo
+            </button>
+          </div>
+          {awardedAllPoints && (
+            <button
+              className="nes-btn is-primary"
+              onClick={async () => {
+                fetch("https://jsonplaceholder.typicode.com/posts", {
+                  method: "POST"
+                }).then(() => {
+                  setPostSucceeded(true);
+                });
+              }}
+            >
+              Send inn
+            </button>
+          )}
+        </React.Fragment>
+      )}
     </div>
   );
 };
