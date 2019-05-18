@@ -3,23 +3,32 @@ import CountryButton from "./CountryButton";
 import { db } from "./Firebase";
 
 const countries = [
-  "Cyprus",
-  "Montenegro",
-  "Finland",
-  "Poland",
-  "Slovenia",
+  "Malta",
+  "Albania",
   "Czech Republic",
-  "Hungary",
-  "Belarus",
-  "Serbia",
-  "Belgium",
-  "Georgia",
-  "Australia",
+  "Germany",
+  "Russia",
+  "Denmark",
+  "San Marino",
+  "North Macedonia",
+  "Sweden",
+  "Slovenia",
+  "Cyprus",
+  "Netherlands",
+  "Greece",
+  "Israel",
+  "Norway",
+  "United Kingdom",
   "Iceland",
   "Estonia",
-  "Portugal",
-  "Greece",
-  "San Marino"
+  "Belarus",
+  "Azerbaijan",
+  "France",
+  "Italy",
+  "Serbia",
+  "Switzerland",
+  "Australia",
+  "Spain"
 ];
 
 const Voting = () => {
