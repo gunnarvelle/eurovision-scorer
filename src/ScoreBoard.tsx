@@ -110,7 +110,16 @@ const ScoreBoard = () => {
                     country
                   ].toLowerCase()}.png`;
                   return (
-                    <tr key={`${country} ${score}`}>
+                    <tr
+                      style={
+                        isLatestVote
+                          ? {
+                              backgroundColor: "rgb(32, 156, 238)"
+                            }
+                          : {}
+                      }
+                      key={`${country} ${score}`}
+                    >
                       <td>
                         <img
                           src={flag}
@@ -119,11 +128,7 @@ const ScoreBoard = () => {
                         />
                         {country}
                       </td>
-                      <td
-                        className={`nes-text ${isLatestVote && "is-error"}`}
-                      >
-                        {votingState.usersVotes[country] || ""}
-                      </td>
+                      <td>{votingState.usersVotes[country] || ""}</td>
                       <td>{score}</td>
                     </tr>
                   );
