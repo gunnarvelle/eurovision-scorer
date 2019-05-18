@@ -37,27 +37,33 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 const GiveScores = () => {
-  const [scores, setScores]: [[number, string][], any] = useState([]);
+  const [votes, setVotes]: [{ [point: number]: string }, any] = useState([]);
   const [points, setPoints] = useState([12, 10, 8, 7, 6, 5, 4, 3, 2, 1]);
+  const [userName, setUserName] = useState("");
 
   const [nextPoint, ...restPoints] = points;
   const [postSucceeded, setPostSucceeded] = useState(false);
 
-  const scoredCountries = scores.map(([, c]) => c);
+  const countriesWithVotes: string[] = Object.keys(votes).map(parseInt).map(
+    (p: number) => votes[p]
+  );
   const awardedAllPoints = !nextPoint;
 
-  const scoresIsEmpty = scores.length === 0;
+  const scoresIsEmpty = Object.keys(votes).length === 0;
   return (
     <div>
       <div>
         <table>
           <tbody>
-            {scores.map(([point, country]) => (
-              <tr key={point + country}>
-                <td>{point}</td>
-                <td>{country}</td>
-              </tr>
-            ))}
+            {Object.entries(votes)
+              .sort((a, b) => parseInt(a[0]) - parseInt(b[0]))
+              .reverse()
+              .map(([point, country]) => (
+                <tr key={point.toString() + country}>
+                  <td>{point}</td>
+                  <td>{country}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
@@ -74,11 +80,10 @@ const GiveScores = () => {
           {countries.map(c => (
             <CountryButton
               key={c}
-              disabled={scoredCountries.includes(c)}
+              disabled={countriesWithVotes.includes(c)}
               onClick={() => {
                 setPoints(restPoints);
-                scores.push([nextPoint, c]);
-                setScores(scores);
+                setVotes({ ...votes, [nextPoint]: c });
               }}
               name={c}
             />
@@ -94,12 +99,15 @@ const GiveScores = () => {
               disabled={scoresIsEmpty}
               className="nes-btn is-error"
               onClick={() => {
-                if (scores) {
-                  const lastScore = scores.pop();
-                  const [point] = lastScore || [0];
+                if (votes) {
+                  const lastScore = Math.max(
+                    ...Object.keys(votes).map(parseInt)
+                  );
+                  const { [lastScore]: foo, ...otherVotes } = votes;
+                  const point = lastScore || 0;
 
                   setPoints([point, ...points]);
-                  setScores([...scores]);
+                  setVotes(otherVotes);
                 }
               }}
             >
@@ -107,24 +115,36 @@ const GiveScores = () => {
             </button>
           </div>
           {awardedAllPoints && (
-            <button
-              className="nes-btn is-primary"
-              onClick={async () => {
-                db.collection("user-votes")
-                  .add({
-                    foo: "bar"
-                  })
-                  .then(function(docRef) {
-                    console.log("Document written with ID: ", docRef.id);
-                    setPostSucceeded(true);
-                  })
-                  .catch(function(error) {
-                    console.error("Error adding document: ", error);
-                  });
-              }}
-            >
-              Send inn
-            </button>
+            <React.Fragment>
+              <div className="nes-field">
+                <label>Navnet ditt</label>
+                <input
+                  value={userName}
+                  onChange={e => setUserName(e.target.value)}
+                  className="nes-input"
+                  type="text"
+                />
+              </div>
+              <button
+                className="nes-btn is-primary"
+                onClick={async () => {
+                  db.collection("user-votes")
+                    .add({
+                      userName,
+                      votes
+                    })
+                    .then(function(docRef) {
+                      console.log("Document written with ID: ", docRef.id);
+                      setPostSucceeded(true);
+                    })
+                    .catch(function(error) {
+                      console.error("Error adding document: ", error);
+                    });
+                }}
+              >
+                Send inn
+              </button>
+            </React.Fragment>
           )}
         </React.Fragment>
       )}
