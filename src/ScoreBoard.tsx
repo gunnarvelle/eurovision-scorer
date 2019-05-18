@@ -6,7 +6,7 @@ type OneUsersVotes = { userName: string; votes: { [point: number]: string } };
 type AllVotes = OneUsersVotes[];
 type VotingState = {
   voteTally: FinalScore;
-  lastVote: [string, number];
+  usersVotes: { [country: string]: number };
   votingUserName: string;
   myVoteStep: number;
 };
@@ -39,6 +39,7 @@ const ScoreBoard = () => {
             country,
             parseInt(points)
           ])
+          .sort(([, points1], [, points2]) => points1 - points2)
           .reduce<VotingState>(
             (tempAccum: VotingState, [country, points]) =>
               tempAccum.myVoteStep >= voteSteps
@@ -49,7 +50,12 @@ const ScoreBoard = () => {
                       ...tempAccum.voteTally,
                       [country]: (tempAccum.voteTally[country] || 0) + points
                     },
-                    myVoteStep: tempAccum.myVoteStep + 1
+                    usersVotes:
+                      ouv.userName === tempAccum.votingUserName
+                        ? { ...tempAccum.usersVotes, [country]: points }
+                        : { [country]: points },
+                    myVoteStep: tempAccum.myVoteStep + 1,
+                    votingUserName: ouv.userName
                   },
 
             soFar
@@ -60,7 +66,7 @@ const ScoreBoard = () => {
     },
     {
       voteTally: countryList.reduce((soFar, a) => ({ ...soFar, [a]: 0 }), {}),
-      lastVote: ["", 0],
+      usersVotes: {},
       votingUserName: "",
       myVoteStep: 0
     }
@@ -70,15 +76,20 @@ const ScoreBoard = () => {
   console.log(allVotes);
   return (
     <React.Fragment>
-      <ol>
-        {Object.entries<number>(votingState.voteTally)
-          .sort(([, points1], [, points2]) => points2 - points1)
-          .map(([country, score]: [string, number]) => (
-            <li key={`${country} ${score}`}>
-              {country} {score}
-            </li>
-          ))}
-      </ol>
+      <h1>{votingState.votingUserName}</h1>
+      <table>
+        <tbody>
+          {Object.entries<number>(votingState.voteTally)
+            .sort(([, points1], [, points2]) => points2 - points1)
+            .map(([country, score]: [string, number]) => (
+              <tr key={`${country} ${score}`}>
+                <td>{country}</td>
+                <td>{votingState.usersVotes[country] || ""}</td>
+                <td>{score}</td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
       <button onClick={() => setVoteSteps(voteSteps - 1)}>Tilbake</button>
       <button onClick={() => setVoteSteps(voteSteps + 1)}>Neste</button>
     </React.Fragment>
