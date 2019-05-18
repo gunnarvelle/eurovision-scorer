@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/eurovision-scorer/static/css/main.05c6b03d.chunk.css",
-    "main.js": "/eurovision-scorer/static/js/main.bf215734.chunk.js",
-    "main.js.map": "/eurovision-scorer/static/js/main.bf215734.chunk.js.map",
+    "main.js": "/eurovision-scorer/static/js/main.795a9111.chunk.js",
+    "main.js.map": "/eurovision-scorer/static/js/main.795a9111.chunk.js.map",
     "runtime~main.js": "/eurovision-scorer/static/js/runtime~main.fb48de96.js",
     "runtime~main.js.map": "/eurovision-scorer/static/js/runtime~main.fb48de96.js.map",
     "static/js/2.1fd0b9f0.chunk.js": "/eurovision-scorer/static/js/2.1fd0b9f0.chunk.js",
     "static/js/2.1fd0b9f0.chunk.js.map": "/eurovision-scorer/static/js/2.1fd0b9f0.chunk.js.map",
     "index.html": "/eurovision-scorer/index.html",
-    "precache-manifest.5d35f9323a135142b8f4a9b33ecd318e.js": "/eurovision-scorer/precache-manifest.5d35f9323a135142b8f4a9b33ecd318e.js",
+    "precache-manifest.9d3df9585d297332de841af3f2be52f2.js": "/eurovision-scorer/precache-manifest.9d3df9585d297332de841af3f2be52f2.js",
     "service-worker.js": "/eurovision-scorer/service-worker.js",
     "static/css/main.05c6b03d.chunk.css.map": "/eurovision-scorer/static/css/main.05c6b03d.chunk.css.map"
   }
