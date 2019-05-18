@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/eurovision-scorer/precache-manifest.85d38ea49903267d804d9b64be11b777.js"
+  "/eurovision-scorer/precache-manifest.5d35f9323a135142b8f4a9b33ecd318e.js"
 );
 
 self.addEventListener('message', (event) => {
