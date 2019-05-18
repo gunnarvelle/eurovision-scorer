@@ -8,8 +8,12 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
-        <Route path="/" exact component={Voting} />
-        <Route path="/aoeu" exact component={ScoreBoard} />
+        <Route path={process.env.PUBLIC_URL + "/"} exact component={Voting} />
+        <Route
+          path={process.env.PUBLIC_URL + "/aoeu"}
+          exact
+          component={ScoreBoard}
+        />
       </Router>
     </div>
   );
