@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CountryButton from "./CountryButton";
+import * as firebase from "firebase";
 
 const countries = [
   "Cyprus",
@@ -20,6 +21,20 @@ const countries = [
   "Greece",
   "San Marino"
 ];
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDMXD0-q5wcY-YxL0CuIS86ibvQEeGpp8c",
+  authDomain: "eurovision-voter.firebaseapp.com",
+  databaseURL: "https://eurovision-voter.firebaseio.com",
+  projectId: "eurovision-voter",
+  storageBucket: "eurovision-voter.appspot.com",
+  messagingSenderId: "685398369353",
+  appId: "1:685398369353:web:d9f10d520a5cf65a"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+const db = firebase.firestore();
 
 const GiveScores = () => {
   const [scores, setScores]: [[number, string][], any] = useState([]);
@@ -95,11 +110,17 @@ const GiveScores = () => {
             <button
               className="nes-btn is-primary"
               onClick={async () => {
-                fetch("https://jsonplaceholder.typicode.com/posts", {
-                  method: "POST"
-                }).then(() => {
-                  setPostSucceeded(true);
-                });
+                db.collection("user-votes")
+                  .add({
+                    foo: "bar"
+                  })
+                  .then(function(docRef) {
+                    console.log("Document written with ID: ", docRef.id);
+                    setPostSucceeded(true);
+                  })
+                  .catch(function(error) {
+                    console.error("Error adding document: ", error);
+                  });
               }}
             >
               Send inn
