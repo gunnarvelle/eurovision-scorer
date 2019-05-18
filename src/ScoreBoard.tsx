@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
 import countryList from "./participatingCountries";
+import nameToCountryCode from "./nameToCountryCode";
 
 type OneUsersVotes = { userName: string; votes: { [point: number]: string } };
 type AllVotes = OneUsersVotes[];
@@ -75,31 +76,63 @@ const ScoreBoard = () => {
 
   console.log(allVotes);
   return (
-    <React.Fragment>
-      <h1>{votingState.votingUserName}</h1>
-      <table>
-        <tbody>
-          {Object.entries<number>(votingState.voteTally)
-            .sort(([, points1], [, points2]) => points2 - points1)
-            .map(([country, score]: [string, number]) => {
-              const isLatestVote =
-                votingState.usersVotes[country] ===
-                Math.max(...Object.values(votingState.usersVotes));
-              return (
-                <tr key={`${country} ${score}`}>
-                  <td>{country}</td>
-                  <td className={`nes-text ${isLatestVote && "is-success"}`}>
-                    {votingState.usersVotes[country] || ""}
-                  </td>
-                  <td>{score}</td>
-                </tr>
-              );
-            })}
-        </tbody>
-      </table>
-      <button onClick={() => setVoteSteps(voteSteps - 1)}>Tilbake</button>
-      <button onClick={() => setVoteSteps(voteSteps + 1)}>Neste</button>
-    </React.Fragment>
+    <div>
+      <h1>Resultater</h1>
+      <div>
+        <button
+          className={`nes-btn is-secondary`}
+          onClick={() => setVoteSteps(voteSteps - 1)}
+        >
+          Tilbake
+        </button>
+        <button
+          className={`nes-btn is-primary`}
+          onClick={() => setVoteSteps(voteSteps + 1)}
+        >
+          Neste
+        </button>
+      </div>
+      <div>Stemmene fra {votingState.votingUserName}</div>
+      <div>
+        <div style={{ width: "400px", margin: "0 auto" }}>
+          <table
+            className="nes-table is-bordered is-centered"
+            style={{ background: "lightblue" }}
+          >
+            <tbody>
+              {Object.entries<number>(votingState.voteTally)
+                .sort(([, points1], [, points2]) => points2 - points1)
+                .map(([country, score]: [string, number]) => {
+                  const isLatestVote =
+                    votingState.usersVotes[country] ===
+                    Math.max(...Object.values(votingState.usersVotes));
+                  const flag = `flags/${nameToCountryCode[
+                    country
+                  ].toLowerCase()}.png`;
+                  return (
+                    <tr key={`${country} ${score}`}>
+                      <td>
+                        <img
+                          src={flag}
+                          className="flag"
+                          alt={`Flag of ${country}`}
+                        />
+                        {country}
+                      </td>
+                      <td
+                        className={`nes-text ${isLatestVote && "is-error"}`}
+                      >
+                        {votingState.usersVotes[country] || ""}
+                      </td>
+                      <td>{score}</td>
+                    </tr>
+                  );
+                })}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   );
 };
 
