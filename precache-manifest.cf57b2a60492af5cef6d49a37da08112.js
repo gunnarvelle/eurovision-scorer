@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "c3c1d7091d095cb53dd49b4d6b3911d5",
+    "revision": "7ba41e42140c3a6ed67b15a5fdf441fe",
     "url": "/eurovision-scorer/index.html"
   },
   {
-    "revision": "b28fecbdb2471d540b54",
+    "revision": "8ade746a1c5f5d400a29",
     "url": "/eurovision-scorer/static/css/main.05c6b03d.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/eurovision-scorer/static/js/2.b68a8cda.chunk.js"
   },
   {
-    "revision": "b28fecbdb2471d540b54",
-    "url": "/eurovision-scorer/static/js/main.2341e469.chunk.js"
+    "revision": "8ade746a1c5f5d400a29",
+    "url": "/eurovision-scorer/static/js/main.9b3e1db6.chunk.js"
   },
   {
     "revision": "254c43a7eb9073567bd9",
