@@ -53,6 +53,26 @@ const Voting = () => {
           </tbody>
         </table>
       </div>
+      {!postSucceeded && (
+        <div>
+          <button
+            disabled={scoresIsEmpty}
+            className={`nes-btn is-error ${scoresIsEmpty && "is-disabled"}`}
+            onClick={() => {
+              if (votes) {
+                const lastScore = Math.max(...Object.keys(votes).map(parseInt));
+                const { [lastScore]: foo, ...otherVotes } = votes;
+                const point = lastScore || 0;
+
+                setPoints([point, ...points]);
+                setVotes(otherVotes);
+              }
+            }}
+          >
+            Angre
+          </button>
+        </div>
+      )}
       {nextPoint && (
         <div>
           <em>
@@ -80,26 +100,6 @@ const Voting = () => {
         <div>Sendte inn!</div>
       ) : (
         <React.Fragment>
-          <div>
-            <button
-              disabled={scoresIsEmpty}
-              className="nes-btn is-error"
-              onClick={() => {
-                if (votes) {
-                  const lastScore = Math.max(
-                    ...Object.keys(votes).map(parseInt)
-                  );
-                  const { [lastScore]: foo, ...otherVotes } = votes;
-                  const point = lastScore || 0;
-
-                  setPoints([point, ...points]);
-                  setVotes(otherVotes);
-                }
-              }}
-            >
-              Undo
-            </button>
-          </div>
           {awardedAllPoints && (
             <React.Fragment>
               <div className="nes-field">
@@ -112,7 +112,7 @@ const Voting = () => {
                 />
               </div>
               <button
-                className="nes-btn is-primary"
+                className={"nes-btn is-primary"}
                 onClick={async () => {
                   db.collection("user-votes")
                     .add({
