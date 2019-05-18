@@ -44,7 +44,8 @@ const getItemStyle = (
 const getListStyle = (isDraggingOver: boolean) => ({
   background: isDraggingOver ? "lightblue" : "lightgrey",
   padding: grid,
-  width: 250
+  width: 250,
+  margin: "0 auto"
 });
 
 type Item = { id: string; countryName: string };
@@ -87,6 +88,14 @@ class DndVoting extends Component<any, State> {
     const { userName, items } = this.state;
     return (
       <div>
+        <h1 style={{ margin: "1rem" }}>Eurovision-finale 2019</h1>
+        <div style={{ textAlign: "left", margin: "1rem" }}>
+          <p>
+            Dra og slipp landene i rekkefølge. Du trenger ikke sortere de som
+            ikke får poeng.
+          </p>
+          <p>Sveip til bunnen for å skrive inn kallenavn og sende inn poeng.</p>
+        </div>
         <DragDropContext onDragEnd={this.onDragEnd}>
           <Droppable droppableId="droppable">
             {(provided, snapshot) => (
@@ -128,47 +137,52 @@ class DndVoting extends Component<any, State> {
             )}
           </Droppable>
         </DragDropContext>
-        {this.state.postSucceeded ? (
-          <div>Sendte inn!</div>
-        ) : (
-          <React.Fragment>
-            <div className="nes-field">
-              <label>Navnet ditt</label>
-              <input
-                value={this.state.userName}
-                onChange={e => this.setState({ userName: e.target.value })}
-                className="nes-input"
-                type="text"
-              />
-            </div>
-            <button
-              className={`nes-btn is-primary ${!userName && "is-disabled"}`}
-              onClick={async () => {
-                const votes: { [point: number]: string } = pointsInOrder.reduce(
-                  (accumulator, point, index) => ({
-                    ...accumulator,
-                    [point]: items[index].countryName
-                  }),
-                  {}
-                );
-                db.collection("user-votes")
-                  .add({
-                    userName,
-                    votes
-                  })
-                  .then(docRef => {
-                    console.log("Document written with ID: ", docRef.id);
-                    this.setState({ postSucceeded: true });
-                  })
-                  .catch(error => {
-                    console.error("Error adding document: ", error);
-                  });
-              }}
-            >
-              Send inn
-            </button>
-          </React.Fragment>
-        )}
+        <div style={{ margin: "1rem" }}>
+          {this.state.postSucceeded ? (
+            <div>Sendte inn!</div>
+          ) : (
+            <React.Fragment>
+              <div className="nes-field" style={{ margin: "1rem" }}>
+                <label>Navnet ditt</label>
+                <input
+                  value={this.state.userName}
+                  onChange={e => this.setState({ userName: e.target.value })}
+                  className="nes-input"
+                  type="text"
+                />
+              </div>
+              <button
+                className={`nes-btn is-primary ${!userName && "is-disabled"}`}
+                style={{ marginBottom: "8rem" }}
+                onClick={async () => {
+                  const votes: {
+                    [point: number]: string;
+                  } = pointsInOrder.reduce(
+                    (accumulator, point, index) => ({
+                      ...accumulator,
+                      [point]: items[index].countryName
+                    }),
+                    {}
+                  );
+                  db.collection("user-votes")
+                    .add({
+                      userName,
+                      votes
+                    })
+                    .then(docRef => {
+                      console.log("Document written with ID: ", docRef.id);
+                      this.setState({ postSucceeded: true });
+                    })
+                    .catch(error => {
+                      console.error("Error adding document: ", error);
+                    });
+                }}
+              >
+                Send inn
+              </button>
+            </React.Fragment>
+          )}
+        </div>
       </div>
     );
   }
