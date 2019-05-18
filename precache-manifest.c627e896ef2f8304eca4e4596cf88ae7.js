@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "189e4857bee8539b603c63cd97eb8792",
+    "revision": "39d4f22ab2862a232b789b4ea3353aba",
     "url": "/eurovision-scorer/index.html"
   },
   {
