@@ -30,9 +30,7 @@ const Voting = () => {
   const [nextPoint, ...restPoints] = points;
   const [postSucceeded, setPostSucceeded] = useState(false);
 
-  const countriesWithVotes: string[] = Object.keys(votes)
-    .map(parseInt)
-    .map((p: number) => votes[p]);
+  const countriesWithVotes: string[] = Object.values(votes);
   const awardedAllPoints = !nextPoint;
 
   const scoresIsEmpty = Object.keys(votes).length === 0;
@@ -60,7 +58,9 @@ const Voting = () => {
             className={`nes-btn is-error ${scoresIsEmpty && "is-disabled"}`}
             onClick={() => {
               if (votes) {
-                const lastScore = Math.max(...Object.keys(votes).map(parseInt));
+                const lastScore = Math.min(
+                  ...Object.keys(votes).map(a => parseInt(a))
+                );
                 const { [lastScore]: foo, ...otherVotes } = votes;
                 const point = lastScore || 0;
 
@@ -112,7 +112,7 @@ const Voting = () => {
                 />
               </div>
               <button
-                className={"nes-btn is-primary"}
+                className={`nes-btn is-primary ${!userName && "is-disabled"}`}
                 onClick={async () => {
                   db.collection("user-votes")
                     .add({

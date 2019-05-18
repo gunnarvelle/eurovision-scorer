@@ -7,6 +7,7 @@ type FinalScore = { [country: string]: number };
 
 const ScoreBoard = () => {
   const [allVotes, setAllVotes]: [AllVotes, any] = useState([]);
+  const [voteSteps, setVoteSteps]: [number, any] = useState(0);
 
   useEffect(() => {
     db.collection("user-votes")
@@ -48,15 +49,17 @@ const ScoreBoard = () => {
 
   console.log(allVotes);
   return (
-    <ol>
-      {Object.entries<number>(finalScore)
-        .sort(([, points1], [, points2]) => points2 - points1)
-        .map(([country, score]: [string, number]) => (
-          <li>
-            {country} {score}
-          </li>
-        ))}
-    </ol>
+    <React.Fragment>
+      <ol>
+        {Object.entries<number>(finalScore)
+          .sort(([, points1], [, points2]) => points2 - points1)
+          .map(([country, score]: [string, number]) => (
+            <li key={`${country} ${score}`}>
+              {country} {score}
+            </li>
+          ))}
+      </ol>
+    </React.Fragment>
   );
 };
 

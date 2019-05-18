@@ -7,13 +7,9 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 const App: React.FC = () => {
   return (
     <div className="App">
-      <Router>
-        <Route path={process.env.PUBLIC_URL + "/"} component={Voting} />
-        <Route
-          path={process.env.PUBLIC_URL + "/aoeu"}
-          exact
-          component={ScoreBoard}
-        />
+      <Router basename={process.env.PUBLIC_URL}>
+        <Route path="/" exact component={Voting} />
+        <Route path="/aoeu" component={ScoreBoard} />
       </Router>
     </div>
   );
