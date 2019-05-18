@@ -57,11 +57,18 @@ const getCountries = (): Item[] =>
 class DndVoting extends Component<any, State> {
   constructor(props: Object) {
     super(props);
-    this.state = {
-      items: getCountries(),
-      userName: "",
-      postSucceeded: false
-    };
+    let item = localStorage.getItem("lastState");
+
+    if (item) {
+      const a = JSON.parse(item);
+      this.state = a;
+    } else {
+      this.state = {
+        items: getCountries(),
+        userName: "",
+        postSucceeded: false
+      };
+    }
     this.onDragEnd = this.onDragEnd.bind(this);
   }
 
@@ -80,6 +87,9 @@ class DndVoting extends Component<any, State> {
     this.setState({
       items
     });
+
+    let key = "lastState";
+    localStorage.setItem(key, JSON.stringify({ ...this.state, items }));
   }
 
   // Normally you would want to split things out into separate components.
@@ -88,7 +98,7 @@ class DndVoting extends Component<any, State> {
     const { userName, items } = this.state;
     return (
       <div>
-        <h1 style={{ margin: "1rem" }}>Eurovision-finale 2019</h1>
+        <h1 style={{ margin: "1rem" }}>Eurovision hos Veronica 2019</h1>
         <div style={{ textAlign: "left", margin: "1rem" }}>
           <p>
             Dra og slipp landene i rekkefølge. Du trenger ikke sortere de som
@@ -197,7 +207,7 @@ class DndVoting extends Component<any, State> {
                     });
                 }}
               >
-                Send inn
+                Send inn poeng
               </button>
             </React.Fragment>
           )}
