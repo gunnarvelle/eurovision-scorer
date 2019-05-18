@@ -9,9 +9,9 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
-        <Route path="/" exact component={Voting} />
+        <Route path="/" exact component={DndVoting} />
         <Route path="/aoeu" component={ScoreBoard} />
-        <Route path="/dnd" component={DndVoting} />
+        <Route path="/old" component={Voting} />
       </Router>
     </div>
   );

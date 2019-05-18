@@ -31,11 +31,11 @@ const getItemStyle = (
 ): CSSProperties => ({
   // some basic styles to make the items look a bit nicer
   userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
+  padding: grid,
+  // margin: `0 0 ${grid}px 0`,
 
   // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
+  background: isDragging ? "lightgreen" : "lightblue",
 
   // styles we need to apply on draggables
   ...draggableStyle
@@ -112,21 +112,40 @@ class DndVoting extends Component<any, State> {
                       ].toLowerCase()}.png`;
                       return (
                         <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={getItemStyle(
-                            snapshot.isDragging,
-                            provided.draggableProps.style
-                          )}
+                          style={{
+                            marginBottom: `${grid * 2}px`
+                          }}
                         >
-                          <img
-                            src={flag}
-                            className="flag"
-                            alt={`Flag of ${item.countryName}`}
-                          />
-                          {item.countryName}{" "}
-                          <span>{pointsInOrder[index] || ""}</span>
+                          <div
+                            className="nes-container is-rounded"
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={getItemStyle(
+                              snapshot.isDragging,
+                              provided.draggableProps.style
+                            )}
+                          >
+                            <div>
+                              <img
+                                src={flag}
+                                className="flag"
+                                alt={`Flag of ${item.countryName}`}
+                              />
+                              {item.countryName}
+                            </div>
+                            {pointsInOrder[index] && (
+                              <div
+                                className="nes-container is-rounded"
+                                style={{
+                                  padding: "0.1rem",
+                                  background: "#fff"
+                                }}
+                              >
+                                {pointsInOrder[index]}
+                              </div>
+                            )}
+                          </div>
                         </div>
                       );
                     }}
