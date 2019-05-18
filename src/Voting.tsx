@@ -36,7 +36,7 @@ firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
-const GiveScores = () => {
+const Voting = () => {
   const [votes, setVotes]: [{ [point: number]: string }, any] = useState([]);
   const [points, setPoints] = useState([12, 10, 8, 7, 6, 5, 4, 3, 2, 1]);
   const [userName, setUserName] = useState("");
@@ -152,4 +152,4 @@ const GiveScores = () => {
   );
 };
 
-export default GiveScores;
+export default Voting;

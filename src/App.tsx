@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
-import GiveScores from "./GiveScores";
+import Voting from "./Voting";
 
 const App: React.FC = () => {
   return (
     <div className="App">
-      <GiveScores />
+      <Voting />
     </div>
   );
 };
