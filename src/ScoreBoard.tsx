@@ -81,13 +81,20 @@ const ScoreBoard = () => {
         <tbody>
           {Object.entries<number>(votingState.voteTally)
             .sort(([, points1], [, points2]) => points2 - points1)
-            .map(([country, score]: [string, number]) => (
-              <tr key={`${country} ${score}`}>
-                <td>{country}</td>
-                <td>{votingState.usersVotes[country] || ""}</td>
-                <td>{score}</td>
-              </tr>
-            ))}
+            .map(([country, score]: [string, number]) => {
+              const isLatestVote =
+                votingState.usersVotes[country] ===
+                Math.max(...Object.values(votingState.usersVotes));
+              return (
+                <tr key={`${country} ${score}`}>
+                  <td>{country}</td>
+                  <td className={`nes-text ${isLatestVote && "is-success"}`}>
+                    {votingState.usersVotes[country] || ""}
+                  </td>
+                  <td>{score}</td>
+                </tr>
+              );
+            })}
         </tbody>
       </table>
       <button onClick={() => setVoteSteps(voteSteps - 1)}>Tilbake</button>
