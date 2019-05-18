@@ -7,7 +7,6 @@ type Props = {
   disabled: boolean;
 };
 
-// @ts-ignore
 export default ({ name, onClick, disabled }: Props) => {
   const flag = `/flags/${nameToCountryCode[name].toLowerCase()}.png`;
   return (

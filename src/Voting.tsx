@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CountryButton from "./CountryButton";
-import * as firebase from "firebase";
+import { db } from "./Firebase";
 
 const countries = [
   "Cyprus",
@@ -22,20 +22,6 @@ const countries = [
   "San Marino"
 ];
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDMXD0-q5wcY-YxL0CuIS86ibvQEeGpp8c",
-  authDomain: "eurovision-voter.firebaseapp.com",
-  databaseURL: "https://eurovision-voter.firebaseio.com",
-  projectId: "eurovision-voter",
-  storageBucket: "eurovision-voter.appspot.com",
-  messagingSenderId: "685398369353",
-  appId: "1:685398369353:web:d9f10d520a5cf65a"
-};
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-const db = firebase.firestore();
-
 const Voting = () => {
   const [votes, setVotes]: [{ [point: number]: string }, any] = useState([]);
   const [points, setPoints] = useState([12, 10, 8, 7, 6, 5, 4, 3, 2, 1]);
@@ -44,9 +30,9 @@ const Voting = () => {
   const [nextPoint, ...restPoints] = points;
   const [postSucceeded, setPostSucceeded] = useState(false);
 
-  const countriesWithVotes: string[] = Object.keys(votes).map(parseInt).map(
-    (p: number) => votes[p]
-  );
+  const countriesWithVotes: string[] = Object.keys(votes)
+    .map(parseInt)
+    .map((p: number) => votes[p]);
   const awardedAllPoints = !nextPoint;
 
   const scoresIsEmpty = Object.keys(votes).length === 0;
