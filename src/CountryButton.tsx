@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default ({ name, onClick, disabled }: Props) => {
-  const flag = `/flags/${nameToCountryCode[name].toLowerCase()}.png`;
+  const flag = `flags/${nameToCountryCode[name].toLowerCase()}.png`;
   return (
     <button
       type="button"
