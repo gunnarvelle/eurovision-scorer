@@ -8,6 +8,7 @@ type VotingState = {
   voteTally: FinalScore;
   lastVote: [string, number];
   votingUserName: string;
+  myVoteStep: number;
 };
 type FinalScore = { [country: string]: number };
 
@@ -39,13 +40,18 @@ const ScoreBoard = () => {
             parseInt(points)
           ])
           .reduce<VotingState>(
-            (tempAccum: VotingState, [country, points]) => ({
-              ...tempAccum,
-              voteTally: {
-                ...tempAccum.voteTally,
-                [country]: (tempAccum.voteTally[country] || 0) + points
-              }
-            }),
+            (tempAccum: VotingState, [country, points]) =>
+              tempAccum.myVoteStep >= voteSteps
+                ? tempAccum
+                : {
+                    ...tempAccum,
+                    voteTally: {
+                      ...tempAccum.voteTally,
+                      [country]: (tempAccum.voteTally[country] || 0) + points
+                    },
+                    myVoteStep: tempAccum.myVoteStep + 1
+                  },
+
             soFar
           );
       } catch (e) {
@@ -55,7 +61,8 @@ const ScoreBoard = () => {
     {
       voteTally: countryList.reduce((soFar, a) => ({ ...soFar, [a]: 0 }), {}),
       lastVote: ["", 0],
-      votingUserName: ""
+      votingUserName: "",
+      myVoteStep: 0
     }
   );
   console.log(votingState);
@@ -72,6 +79,8 @@ const ScoreBoard = () => {
             </li>
           ))}
       </ol>
+      <button onClick={() => setVoteSteps(voteSteps - 1)}>Tilbake</button>
+      <button onClick={() => setVoteSteps(voteSteps + 1)}>Neste</button>
     </React.Fragment>
   );
 };
