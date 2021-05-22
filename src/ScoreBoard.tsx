@@ -4,7 +4,7 @@ import countryList from "./participatingCountries";
 import nameToCountryCode from "./nameToCountryCode";
 
 type OneUsersVotes = { userName: string; votes: { [point: number]: string } };
-type AllVotes = OneUsersVotes[];
+type AllVotes = Array<OneUsersVotes>;
 type VotingState = {
   voteTally: FinalScore;
   usersVotes: { [country: string]: number };
@@ -14,8 +14,8 @@ type VotingState = {
 type FinalScore = { [country: string]: number };
 
 const ScoreBoard = () => {
-  const [allVotes, setAllVotes]: [AllVotes, any] = useState([]);
-  const [voteSteps, setVoteSteps]: [number, any] = useState(0);
+  const [allVotes, setAllVotes] = useState<AllVotes>([]);
+  const [voteSteps, setVoteSteps] = useState<number>(0);
 
   useEffect(() => {
     db.collection("user-votes")
