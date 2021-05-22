@@ -128,8 +128,8 @@ const ScoreBoard = () => {
                         />
                         {country}
                       </td>
-                      <td>{votingState.usersVotes[country] || ""}</td>
-                      <td>{score}</td>
+                      <td style={{width: "4rem"}}>{votingState.usersVotes[country] || ""}</td>
+                      <td style={{width: "4rem"}}>{score}</td>
                     </tr>
                   );
                 })}
