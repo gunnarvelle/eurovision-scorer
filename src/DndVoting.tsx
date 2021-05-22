@@ -57,17 +57,37 @@ const getCountries = (): Item[] =>
 class DndVoting extends Component<any, State> {
   constructor(props: Object) {
     super(props);
-    let item = localStorage.getItem("lastState");
+    const countriesAsTheyWouldAppearWhenFresh = getCountries();
+    const defaultState = {
+      items: countriesAsTheyWouldAppearWhenFresh,
+      userName: "",
+      postSucceeded: false
+    };
+    const localStorageContent = localStorage.getItem("lastState");
+    const savedState = localStorageContent
+      ? JSON.parse(localStorageContent)
+      : defaultState;
 
-    if (item) {
-      const a = JSON.parse(item);
-      this.state = a;
+    const areSameLength = defaultState.items.length === savedState.items.length;
+    const containSameCountries =
+      intersection(
+        new Set(defaultState.items.map(({ countryName }) => countryName)),
+        new Set(
+          savedState.items.map(
+            ({ countryName }: { countryName: string }) => countryName
+          )
+        )
+      ).size === defaultState.items.length;
+    const savedCountriesAreEqualToParticipatingCountries =
+      areSameLength && containSameCountries;
+
+    console.log("areSameLength", areSameLength);
+    console.log("containSameCountries", containSameCountries);
+
+    if (savedCountriesAreEqualToParticipatingCountries) {
+      this.state = savedState;
     } else {
-      this.state = {
-        items: getCountries(),
-        userName: "",
-        postSucceeded: false
-      };
+      this.state = defaultState;
     }
     this.onDragEnd = this.onDragEnd.bind(this);
   }
@@ -117,9 +137,6 @@ class DndVoting extends Component<any, State> {
                 {items.map((item, index) => (
                   <Draggable key={item.id} draggableId={item.id} index={index}>
                     {(provided: DraggableProvided, snapshot) => {
-                      const flag = `flags/${nameToCountryCode[
-                        item.countryName
-                      ].toLowerCase()}.png`;
                       return (
                         <div
                           style={{
@@ -138,7 +155,9 @@ class DndVoting extends Component<any, State> {
                           >
                             <div>
                               <img
-                                src={flag}
+                                src={`flags/${nameToCountryCode[
+                                  item.countryName
+                                ].toLowerCase()}.png`}
                                 className="flag"
                                 alt={`Flag of ${item.countryName}`}
                               />
@@ -215,6 +234,16 @@ class DndVoting extends Component<any, State> {
       </div>
     );
   }
+}
+
+function intersection<T>(setA: Set<T>, setB: Set<T>): Set<T> {
+  let _intersection = new Set<T>();
+  for (let elem of setB) {
+    if (setA.has(elem)) {
+      _intersection.add(elem);
+    }
+  }
+  return _intersection;
 }
 
 export default DndVoting;
