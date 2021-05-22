@@ -1,6 +1,6 @@
 {
   "name": "eurovision-scorer",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "private": true,
   "homepage": "http://vages.github.io/eurovision-scorer",
   "dependencies": {
@@ -49,6 +49,9 @@
     ]
   },
   "devDependencies": {
+    "@babel/helper-builder-react-jsx": "^7.12.13",
+    "@babel/helper-define-map": "^7.13.12",
+    "@babel/helper-regex": "^7.10.5",
     "@types/testing-library__cypress": "^5.0.8",
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
