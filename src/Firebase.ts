@@ -4,7 +4,7 @@ import "firebase/firestore";
 const firebaseConfig = {
   apiKey: "AIzaSyAyiPwsV5KhuJBve4i9Ci4qcXyB9fc5XQs",
   authDomain: "esc-voter.firebaseapp.com",
-  databaseURL: "https://esc-voter.firebaseio.com",
+  databaseURL: "https://esc-voter-default-rtdb.firebaseio.com/",
   projectId: "esc-voter",
   storageBucket: "esc-voter.appspot.com",
   messagingSenderId: "124189722667",

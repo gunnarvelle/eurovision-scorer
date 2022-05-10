@@ -10,7 +10,7 @@ const App: React.FC = () => {
     <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Route path="/" exact component={DndVoting} />
-        <Route path="/aoeu" component={ScoreBoard} />
+        <Route path="/score" component={ScoreBoard} />
         <Route path="/old" component={Voting} />
       </Router>
     </div>
