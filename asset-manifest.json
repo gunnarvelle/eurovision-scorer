@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/eurovision-scorer/static/css/main.c7c35a0a.chunk.css",
-    "main.js": "/eurovision-scorer/static/js/main.1fa6621a.chunk.js",
-    "main.js.map": "/eurovision-scorer/static/js/main.1fa6621a.chunk.js.map",
+    "main.js": "/eurovision-scorer/static/js/main.1532ac1c.chunk.js",
+    "main.js.map": "/eurovision-scorer/static/js/main.1532ac1c.chunk.js.map",
     "runtime-main.js": "/eurovision-scorer/static/js/runtime-main.3debb13e.js",
     "runtime-main.js.map": "/eurovision-scorer/static/js/runtime-main.3debb13e.js.map",
-    "static/js/2.68000ede.chunk.js": "/eurovision-scorer/static/js/2.68000ede.chunk.js",
-    "static/js/2.68000ede.chunk.js.map": "/eurovision-scorer/static/js/2.68000ede.chunk.js.map",
+    "static/js/2.84300444.chunk.js": "/eurovision-scorer/static/js/2.84300444.chunk.js",
+    "static/js/2.84300444.chunk.js.map": "/eurovision-scorer/static/js/2.84300444.chunk.js.map",
     "index.html": "/eurovision-scorer/index.html",
     "static/css/main.c7c35a0a.chunk.css.map": "/eurovision-scorer/static/css/main.c7c35a0a.chunk.css.map",
-    "static/js/2.68000ede.chunk.js.LICENSE.txt": "/eurovision-scorer/static/js/2.68000ede.chunk.js.LICENSE.txt"
+    "static/js/2.84300444.chunk.js.LICENSE.txt": "/eurovision-scorer/static/js/2.84300444.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3debb13e.js",
-    "static/js/2.68000ede.chunk.js",
+    "static/js/2.84300444.chunk.js",
     "static/css/main.c7c35a0a.chunk.css",
-    "static/js/main.1fa6621a.chunk.js"
+    "static/js/main.1532ac1c.chunk.js"
   ]
 }
