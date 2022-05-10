@@ -187,7 +187,7 @@ class DndVoting extends Component<any, State> {
         </DragDropContext>
         <div style={{ margin: "1rem" }}>
           {this.state.postSucceeded ? (
-            <div>Sendte inn!</div>
+            <div>Takk for dine svar!</div>
           ) : (
             <React.Fragment>
               <div className="nes-field" style={{ margin: "1rem" }}>
