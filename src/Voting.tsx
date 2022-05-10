@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CountryButton from "./CountryButton";
 import { db } from "./Firebase";
-import countries from "./participatingCountries";
+import participatingCountries from "./participatingCountries";
 
 const Voting = () => {
   const [votes, setVotes]: [{ [point: number]: string }, any] = useState([]);
@@ -64,7 +64,7 @@ const Voting = () => {
       )}
       {nextPoint && (
         <div>
-          {countries.map(c => (
+          {participatingCountries.map(c => (
             <CountryButton
               key={c}
               disabled={countriesWithVotes.includes(c)}

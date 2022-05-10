@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { db } from "./Firebase";
-import countryList from "./participatingCountries";
+import participatingCountries from "./participatingCountries";
 import nameToCountryCode from "./nameToCountryCode";
 
 type OneUsersVotes = { userName: string; votes: { [point: number]: string } };
@@ -66,7 +66,7 @@ const ScoreBoard = () => {
       }
     },
     {
-      voteTally: countryList.reduce((soFar, a) => ({ ...soFar, [a]: 0 }), {}),
+      voteTally: participatingCountries.reduce((soFar, a) => ({ ...soFar, [a]: 0 }), {}),
       usersVotes: {},
       votingUserName: "",
       myVoteStep: 0

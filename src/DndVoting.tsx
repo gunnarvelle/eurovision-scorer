@@ -8,7 +8,7 @@ import {
   DropResult,
   NotDraggingStyle
 } from "react-beautiful-dnd";
-import countries from "./participatingCountries";
+import participatingCountries from "./participatingCountries";
 import nameToCountryCode from "./nameToCountryCode";
 import { db } from "./Firebase";
 
@@ -52,7 +52,7 @@ type Item = { id: string; countryName: string };
 type State = { items: Item[]; userName: string; postSucceeded: boolean };
 
 const getCountries = (): Item[] =>
-  countries.map((countryName, index) => ({ id: `item-${index}`, countryName }));
+  participatingCountries.map((countryName, index) => ({ id: `item-${index}`, countryName }));
 
 class DndVoting extends Component<any, State> {
   constructor(props: Object) {

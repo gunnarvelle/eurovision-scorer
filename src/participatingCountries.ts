@@ -1,5 +1,4 @@
-// eslint-disable-next-line
-export default [
+const participatingCountries = [
   "Cyprus",
   "Albania",
   "Israel",
@@ -27,3 +26,5 @@ export default [
   "Sweden",
   "San Marino"
 ];
+
+export default participatingCountries;
