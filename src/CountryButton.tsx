@@ -7,6 +7,7 @@ type Props = {
   disabled: boolean;
 };
 
+// eslint-disable-next-line
 export default ({ name, onClick, disabled }: Props) => {
   const flag = `flags/${nameToCountryCode[name].toLowerCase()}.png`;
   return (

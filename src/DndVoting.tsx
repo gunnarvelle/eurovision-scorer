@@ -118,7 +118,7 @@ class DndVoting extends Component<any, State> {
     const { userName, items } = this.state;
     return (
       <div>
-        <h1 style={{ margin: "1rem" }}>ESC hos Ragni og Eirik 2021</h1>
+        <h1 style={{ margin: "1rem" }}>ESC hos Lene og Gunnar 2022</h1>
         <div style={{ textAlign: "left", margin: "1rem" }}>
           <p>
             Dra og slipp landene i rekkefølge. Du trenger ikke sortere de som
