@@ -60,7 +60,7 @@ const s: NameToCountryCode = {
   Cuba: "CU",
   Curacao: "CW",
   Cyprus: "CY",
-  "Czech Republic": "CZ",
+  Czechia: "CZ",
   "Cote d'Ivoire": "CI",
   Denmark: "DK",
   Djibouti: "DJ",
